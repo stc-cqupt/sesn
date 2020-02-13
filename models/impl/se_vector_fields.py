@@ -197,31 +197,6 @@ def apply_transform(filter, interp_vars, filters_size, old_bilinear_interpolatio
     return rotated_filter
 
 
-if __name__ == '__main__':
-    """ Test rotation of filter """
-    import torch.nn as nn
-    from torch.nn import functional as F
-    from torch.nn.parameter import Parameter
-    import math
-    # from sevf_utils import *
-
-    ks = [9, 9]  # Kernel size
-    angle = 45
-    interp_vars = get_filter_rotation_transforms(ks, angle)
-
-    w = Variable(torch.ones([1, 1]+ks))
-    #w[:,:,4,:] = 5
-    w[:, :, :, 4] = 5
-    #w[:,:,0,0] = -1
-
-    print(w)
-    for angle in [0, 90, 45, 180, 65, 10]:
-        print(angle, 'degrees')
-        print(apply_transform(w, get_filter_rotation_transforms(ks, angle)[
-              :-1], ks, old_bilinear_interpolation=True) * Variable(get_filter_rotation_transforms(ks, angle)[-1]))
-        print('Difference', torch.sum(apply_transform(w, get_filter_rotation_transforms(ks, angle)[:-1], ks, old_bilinear_interpolation=False) * Variable(get_filter_rotation_transforms(
-            ks, angle)[-1]) - apply_transform(w, get_filter_rotation_transforms(ks, angle)[:-1], ks, old_bilinear_interpolation=True) * Variable(get_filter_rotation_transforms(ks, angle)[-1])))
-
 
 class ScaleConv(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, stride=1,
