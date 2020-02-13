@@ -1,5 +1,4 @@
 # !/bin/bash
-# DATA_DIR="/storage/datasets/stl10"
 STL_DIR="${STL_DIR:-./datasets/stl10}"
 
 
