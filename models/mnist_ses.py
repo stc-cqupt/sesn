@@ -6,25 +6,6 @@ from .impl.ses_conv import SESMaxProjection
 from .impl.ses_conv import SESConv_Z2_H, SESConv_H_H
 
 
-class InvProj(nn.Module):
-
-    def __init__(self, scales, size):
-        super().__init__()
-        scales = torch.Tensor(scales).view(1, 1, -1, 1, 1)
-        self.scales = nn.Parameter(scales, requires_grad=False)
-        self.pool = nn.AvgPool2d(size, padding=2)
-        self.proj = SESMaxProjection()
-
-    def forward(self, x):
-        x = x * self.scales**2
-        B, C, S, H, W = x.shape
-        x = x.view(B, -1, H, W)
-        x = self.pool(x)
-        B, C1, H1, W1 = x.shape
-        x = x.view(B, C, S, H1, W1)
-        return self.proj(x)
-
-
 class MNIST_SES_Scalar(nn.Module):
 
     def __init__(self, pool_size=4, kernel_size=11, scales=[1.0], basis_type='A', **kwargs):
