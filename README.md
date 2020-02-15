@@ -38,3 +38,16 @@ If you are only interested in SESN building blocks, check [`models/impl/ses_basi
 
 ## Acknowledgements
 The Robert Bosch GmbH is acknowledged for financial support.
+
+## BibTeX
+If you found this work useful in your research, please consider citing
+```
+@inproceedings{
+    Sosnovik2020Scale-Equivariant,
+    title={Scale-Equivariant Steerable Networks},
+    author={Ivan Sosnovik and Michał Szmaja and Arnold Smeulders},
+    booktitle={International Conference on Learning Representations},
+    year={2020},
+    url={https://openreview.net/forum?id=HJgpugrKPS}
+}
+```
